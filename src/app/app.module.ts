@@ -7,6 +7,8 @@ import { UploadComponent } from './upload/upload.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    TextFieldModule,
+    MatFormFieldModule,
     HttpClientModule,
     MatIconModule,
     MatProgressBarModule

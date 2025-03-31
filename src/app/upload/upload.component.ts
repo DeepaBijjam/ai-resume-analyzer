@@ -1,6 +1,7 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
-import { finalize, Subscription } from 'rxjs';
+import { finalize, Observable, Subscription, throwError } from 'rxjs';
+
 
 @Component({
   selector: 'app-upload',
@@ -10,29 +11,45 @@ import { finalize, Subscription } from 'rxjs';
 })
 export class UploadComponent {
 
-  fileName = '';
+ 
 
-    constructor(private http: HttpClient) {}
+status: "initial" | "uploading" | "success" | "fail" = "initial";
+  file: File | null = null;
 
-    onFileSelected(event: Event) {
+  constructor(private http: HttpClient) {}
 
-        const input = event.target as HTMLInputElement;
-        if (input?.files && input.files[0]) {
-            const file: File = input.files[0];
+  ngOnInit(): void {}
 
-        if (file) {
+  onChange(event: any) {
+    const file: File = event.target.files[0];
 
-            this.fileName = file.name;
-
-            const formData = new FormData();
-
-            formData.append("thumbnail", file);
-
-            const upload$ = this.http.post("http://localhost:8092/api/upload", formData);
-
-            upload$.subscribe();
-            console.log(upload$);
-        }
+    if (file) {
+      this.status = "initial";
+      this.file = file;
     }
   }
-}
+
+  onUpload() {
+
+    if (this.file) {
+      const formData = new FormData();
+
+      formData.append("file", this.file, this.file.name);
+
+      const upload$ = this.http.post("http://localhost:8092/api/upload", formData,{ responseType: 'text' });
+
+      this.status = "uploading";
+
+      upload$.subscribe({
+        next: () => {
+          this.status = "success";
+        },
+        error: (error: any) => {
+          this.status = "fail";
+          return throwError(() => error);
+         
+        },
+      });
+    }
+  }
+ }
