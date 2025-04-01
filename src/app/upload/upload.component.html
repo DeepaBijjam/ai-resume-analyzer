@@ -9,26 +9,28 @@
 </mat-form-field> -->
 
 
-
-<input type="file" class="file-input" (change)="onChange($event)" #fileUpload />
+<div class="toUpload">
+  <input type="file" class="file-input" (change)="onChange($event)" #fileUpload />
+</div>
 
 <div *ngIf="file">
   <section class="file-info">
-    File details:
+    <br>
+    <!-- <b>File details:</b> -->
     <ul>
-      <li>Name: {{file.name}}</li>
-      <li>Type: {{file.type}}</li>
-      <li>Size: {{file.size}} bytes</li>
+      <li><b>Name:</b> {{file.name}}</li>
+      <!-- <li><b>Type:</b> {{file.type}}</li>
+      <li><b>Size:</b> {{file.size}} bytes</li> -->
     </ul>
   </section>
 
-  <button (click)="onUpload()">Upload the file</button>
+  <button (click)="onUpload()">Analyze</button>
 
   <section [ngSwitch]="status">
-    <p *ngSwitchCase="'uploading'">⏳ Uploading...</p>
+    <p *ngSwitchCase="'uploading'">⏳ Analyzing...</p>
     <p *ngSwitchCase="'success'">✅ Done!</p>
     <p *ngSwitchCase="'fail'">❌ Error!</p>
-    <p *ngSwitchDefault>😶 Waiting to upload...</p>
+    <p *ngSwitchDefault>😶 Waiting to Analyze...</p>
   </section>
 </div>
 

@@ -36,7 +36,7 @@ status: "initial" | "uploading" | "success" | "fail" = "initial";
 
       formData.append("file", this.file, this.file.name);
 
-      const upload$ = this.http.post("http://localhost:8092/api/upload", formData,{ responseType: 'text' });
+      const upload$ = this.http.post("http://localhost:8093/api/upload", formData,{ responseType: 'text' });
 
       this.status = "uploading";
 
