@@ -1,30 +1,24 @@
 
 
-<!-- <mat-form-field>
-  <mat-label>Description</mat-label>
-  <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-            cdkAutosizeMinRows="3"
-            cdkAutosizeMaxRows="8">
-  </textarea>
-</mat-form-field> -->
 
+<form (ngSubmit)="onAnalyze()">
+  <p><label for="jobdescription">Job Description</label></p>
+  <textarea id="myTextarea" [(ngModel)]="textareaContent" name="content" rows="4" cols="50"></textarea>
 
-<div class="toUpload">
-  <input type="file" class="file-input" (change)="onChange($event)" #fileUpload />
-</div>
+  <div class="toUpload">
+    <input type="file" class="file-input" (change)="onChange($event)" #fileUpload />
+  </div>
+
+  <button type="submit">Analyze</button>
+</form>
 
 <div *ngIf="file">
   <section class="file-info">
     <br>
-    <!-- <b>File details:</b> -->
     <ul>
       <li><b>Name:</b> {{file.name}}</li>
-      <!-- <li><b>Type:</b> {{file.type}}</li>
-      <li><b>Size:</b> {{file.size}} bytes</li> -->
     </ul>
   </section>
-
-  <button (click)="onUpload()">Analyze</button>
 
   <section [ngSwitch]="status">
     <p *ngSwitchCase="'uploading'">⏳ Analyzing...</p>
@@ -34,7 +28,28 @@
   </section>
 </div>
 
-<!-- <mat-form-field>
-  <mat-label>Textarea</mat-label>
-  <textarea matInput></textarea>
-</mat-form-field> -->
+  <!-- <div *ngIf="status==='success'">
+    <h3>AI Resume Comparison Result:</h3>
+    
+    <div class="result"> 
+      <pre> 
+        {{ comparisonResult }}
+      </pre>
+    </div>
+</div> -->
+
+<div *ngIf="status==='success'" class="container">
+  
+  <div class="result"> 
+    <pre> 
+      {{ comparisonResult }}
+    </pre>
+  </div>
+</div>
+
+
+
+
+
+
+
