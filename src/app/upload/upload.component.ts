@@ -16,6 +16,8 @@ import { ResultService } from '../result.service';
 export class UploadComponent {
   
   textareaContent: string = '';
+  loadCounter = 0;
+
   status: "initial" | "uploading" | "success" | "fail" = "initial";
   file: File | null = null;
 
@@ -98,6 +100,16 @@ sendText() {
       error => console.error('Error comparing resume:', error)
     );
   
+}
+
+onCountAnalyze() {
+  this.loadCounter++;
+
+  if (this.loadCounter >= 2) {
+    this.status = 'success'; // Show the output only after second submit
+  } else {
+    this.status = 'uploading'; // Indicate loading state before showing the output
+  }
 }
 
 

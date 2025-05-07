@@ -22,21 +22,15 @@
 
   <section [ngSwitch]="status">
     <p *ngSwitchCase="'uploading'">⏳ Analyzing...</p>
-    <p *ngSwitchCase="'success'">✅ Done!</p>
+    <ng-container *ngSwitchCase="'success'">
+      <p *ngIf="loadCounter >= 2">✅ Done!</p>
+    </ng-container>
     <p *ngSwitchCase="'fail'">❌ Error!</p>
     <p *ngSwitchDefault>😶 Waiting to Analyze...</p>
   </section>
 </div>
 
-  <!-- <div *ngIf="status==='success'">
-    <h3>AI Resume Comparison Result:</h3>
-    
-    <div class="result"> 
-      <pre> 
-        {{ comparisonResult }}
-      </pre>
-    </div>
-</div> -->
+ 
 
 <div *ngIf="status==='success'" class="container">
   
