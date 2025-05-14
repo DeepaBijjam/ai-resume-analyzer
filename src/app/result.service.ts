@@ -15,7 +15,7 @@ export class ResultService {
   //   return this.http.post(this.apiUrl, null, { responseType: 'text' });
   // }
 
-  private apiUrl = 'http://localhost:8093/api/resumemarks';
+  private apiUrl = 'https://backend-ai-resume-analyser.onrender.com/api/resumemarks';
 
   constructor(private http: HttpClient) {}
 

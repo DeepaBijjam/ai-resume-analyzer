@@ -3,15 +3,12 @@ import { Component, Input } from '@angular/core';
 import { finalize, Observable, Subscription, throwError } from 'rxjs';
 import { ResultService } from '../result.service';
 
-
 @Component({
   selector: 'app-upload',
   standalone: false,
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.css'
 })
-
-
 
 export class UploadComponent {
   
@@ -42,7 +39,7 @@ export class UploadComponent {
 
       this.status = "uploading";
 
-      this.http.post("http://localhost:8093/api/upload", formData, { responseType: 'text' }).subscribe({
+      this.http.post("https://backend-ai-resume-analyser.onrender.com/api/upload", formData, { responseType: 'text' }).subscribe({
         next: () => {
           this.fileUploadStatus = true;
           this.checkUploadStatus();
@@ -60,7 +57,7 @@ sendText() {
 
   const jsonString = JSON.stringify(data);
   
-  this.http.post('http://localhost:8093/api/savetext', jsonString, {
+  this.http.post('https://backend-ai-resume-analyser.onrender.com/api/savetext', jsonString, {
     headers: { 'Content-Type': 'application/json' } ,// Specify content type explicitly
     responseType: 'text' 
   }).subscribe({
